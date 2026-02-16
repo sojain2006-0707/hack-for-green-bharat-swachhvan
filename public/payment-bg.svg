@@ -1,0 +1,46 @@
+<svg width="1200" height="1600" viewBox="0 0 1200 1600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1200" y2="1600" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#10B981" stop-opacity="0.10"/>
+      <stop offset="0.55" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="1" stop-color="#0EA5E9" stop-opacity="0.10"/>
+    </linearGradient>
+    <radialGradient id="r1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(260 320) rotate(42) scale(360 340)">
+      <stop stop-color="#34D399" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#34D399" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="r2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(960 220) rotate(25) scale(420 380)">
+      <stop stop-color="#38BDF8" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#38BDF8" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="r3" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(640 1320) rotate(12) scale(520 520)">
+      <stop stop-color="#A3E635" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#A3E635" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="stroke" x1="120" y1="260" x2="1080" y2="1120" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#10B981" stop-opacity="0.25"/>
+      <stop offset="1" stop-color="#0EA5E9" stop-opacity="0.18"/>
+    </linearGradient>
+    <filter id="blur" x="-100" y="-100" width="1400" height="1800" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="1600" fill="url(#g1)"/>
+
+  <g filter="url(#blur)">
+    <circle cx="260" cy="320" r="300" fill="url(#r1)"/>
+    <circle cx="980" cy="260" r="340" fill="url(#r2)"/>
+    <circle cx="640" cy="1320" r="420" fill="url(#r3)"/>
+  </g>
+
+  <path d="M160 520 C 360 360, 520 680, 720 520 S 1080 560, 1040 740" stroke="url(#stroke)" stroke-width="2" stroke-linecap="round" stroke-dasharray="6 10" opacity="0.55"/>
+  <path d="M220 960 C 420 820, 560 1120, 760 960 S 1080 980, 1010 1160" stroke="url(#stroke)" stroke-width="2" stroke-linecap="round" stroke-dasharray="6 10" opacity="0.40"/>
+
+  <g opacity="0.35">
+    <circle cx="260" cy="520" r="6" fill="#10B981"/>
+    <circle cx="720" cy="520" r="6" fill="#0EA5E9"/>
+    <circle cx="220" cy="960" r="6" fill="#10B981"/>
+    <circle cx="760" cy="960" r="6" fill="#0EA5E9"/>
+  </g>
+</svg>

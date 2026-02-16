@@ -1,0 +1,67 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="g1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(460 240) rotate(35) scale(680 460)">
+      <stop stop-color="#FCE7F3" stop-opacity="0.95"/>
+      <stop offset="0.55" stop-color="#F5D0FE" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#C4B5FD" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="g2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1180 560) rotate(-25) scale(760 520)">
+      <stop stop-color="#DDD6FE" stop-opacity="0.9"/>
+      <stop offset="0.5" stop-color="#A7F3D0" stop-opacity="0.25"/>
+      <stop offset="1" stop-color="#93C5FD" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="stroke" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#A855F7" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#2563EB" stop-opacity="0.18"/>
+    </linearGradient>
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="22" result="b"/>
+      <feColorMatrix in="b" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.55 0"/>
+      <feBlend in="SourceGraphic" mode="screen"/>
+    </filter>
+  </defs>
+
+  <!-- soft wash -->
+  <rect width="1600" height="900" fill="#FBFCFF"/>
+  <rect width="1600" height="900" fill="url(#g1)"/>
+  <rect width="1600" height="900" fill="url(#g2)"/>
+
+  <!-- bokeh dots -->
+  <g opacity="0.55" filter="url(#blur)">
+    <circle cx="250" cy="680" r="72" fill="#F472B6" fill-opacity="0.28"/>
+    <circle cx="520" cy="720" r="54" fill="#A855F7" fill-opacity="0.22"/>
+    <circle cx="980" cy="160" r="66" fill="#60A5FA" fill-opacity="0.18"/>
+    <circle cx="1320" cy="240" r="88" fill="#34D399" fill-opacity="0.13"/>
+    <circle cx="1200" cy="780" r="74" fill="#C084FC" fill-opacity="0.18"/>
+  </g>
+
+  <!-- flowing lines -->
+  <g opacity="0.6">
+    <path d="M-40 560 C 220 430, 380 650, 640 520 C 920 380, 1080 560, 1360 440 C 1480 388, 1580 400, 1680 360" stroke="url(#stroke)" stroke-width="2"/>
+    <path d="M-60 610 C 210 500, 390 720, 680 590 C 920 490, 1120 700, 1400 560 C 1520 500, 1600 520, 1700 480" stroke="url(#stroke)" stroke-opacity="0.7" stroke-width="2"/>
+  </g>
+
+  <!-- abstract shield + heart mark -->
+  <g transform="translate(1040 270)" opacity="0.9" filter="url(#glow)">
+    <path d="M160 40 C120 58, 86 64, 40 72 V170 C40 270, 100 320, 160 356 C220 320, 280 270, 280 170 V72 C234 64, 200 58, 160 40Z" fill="#FFFFFF" fill-opacity="0.55" stroke="#A855F7" stroke-opacity="0.35"/>
+    <path d="M160 128 C142 104, 116 102, 104 120 C92 138, 100 162, 126 186 L160 216 L194 186 C220 162, 228 138, 216 120 C204 102, 178 104, 160 128Z" fill="#F472B6" fill-opacity="0.38"/>
+    <path d="M120 232 C132 248, 150 260, 160 266 C170 260, 188 248, 200 232" stroke="#2563EB" stroke-opacity="0.25" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  <!-- subtle pad-like capsule shapes -->
+  <g opacity="0.55">
+    <rect x="160" y="180" width="220" height="92" rx="46" fill="#FFFFFF" fill-opacity="0.55" stroke="#A855F7" stroke-opacity="0.18"/>
+    <rect x="206" y="206" width="128" height="40" rx="20" fill="#FCE7F3" fill-opacity="0.9"/>
+
+    <rect x="320" y="320" width="260" height="104" rx="52" fill="#FFFFFF" fill-opacity="0.45" stroke="#2563EB" stroke-opacity="0.12"/>
+    <rect x="374" y="350" width="152" height="44" rx="22" fill="#EDE9FE" fill-opacity="0.9"/>
+  </g>
+
+  <!-- bottom skyline haze -->
+  <g opacity="0.25">
+    <path d="M0 760 C220 720, 360 820, 580 780 C820 736, 980 840, 1200 800 C1400 772, 1510 810, 1600 780 V900 H0 Z" fill="#111827" fill-opacity="0.06"/>
+  </g>
+</svg>

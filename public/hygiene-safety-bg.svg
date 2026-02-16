@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#EAF7FF"/>
+      <stop offset="0.55" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#ECFFF5"/>
+    </linearGradient>
+
+    <radialGradient id="glow1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(280 240) rotate(90) scale(340 340)">
+      <stop offset="0" stop-color="#34D399" stop-opacity="0.65"/>
+      <stop offset="1" stop-color="#34D399" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="glow2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(880 170) rotate(90) scale(360 360)">
+      <stop offset="0" stop-color="#38BDF8" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#38BDF8" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="glow3" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(680 650) rotate(90) scale(420 420)">
+      <stop offset="0" stop-color="#22C55E" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#22C55E" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="shield" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0F172A" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#0F172A" stop-opacity="0.06"/>
+    </linearGradient>
+
+    <filter id="softBlur" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="10"/>
+    </filter>
+
+    <filter id="shadow" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#0F172A" flood-opacity="0.10"/>
+    </filter>
+  </defs>
+
+  <!-- Base wash -->
+  <rect width="1200" height="800" fill="url(#sky)"/>
+
+  <!-- Ambient glows -->
+  <circle cx="280" cy="240" r="340" fill="url(#glow1)"/>
+  <circle cx="880" cy="170" r="360" fill="url(#glow2)"/>
+  <circle cx="680" cy="650" r="420" fill="url(#glow3)"/>
+
+  <!-- Soft leaf silhouettes -->
+  <g opacity="0.40" filter="url(#softBlur)">
+    <path d="M1085 120c-90 40-145 122-160 220 95-35 153-118 160-220Z" fill="#22C55E"/>
+    <path d="M1105 290c-80 30-140 100-170 205 90-35 155-105 170-205Z" fill="#16A34A"/>
+    <path d="M120 560c120-30 205-120 240-245-125 30-215 122-240 245Z" fill="#34D399"/>
+  </g>
+
+  <!-- Bubble grid -->
+  <g opacity="0.34">
+    <circle cx="1000" cy="520" r="12" stroke="#0F172A" stroke-opacity="0.22"/>
+    <circle cx="1046" cy="548" r="8" stroke="#0F172A" stroke-opacity="0.20"/>
+    <circle cx="1014" cy="585" r="6" stroke="#0F172A" stroke-opacity="0.18"/>
+    <circle cx="930" cy="570" r="10" stroke="#0F172A" stroke-opacity="0.18"/>
+    <circle cx="950" cy="520" r="6" stroke="#0F172A" stroke-opacity="0.18"/>
+
+    <circle cx="260" cy="190" r="11" stroke="#0F172A" stroke-opacity="0.20"/>
+    <circle cx="220" cy="230" r="7" stroke="#0F172A" stroke-opacity="0.18"/>
+    <circle cx="290" cy="240" r="6" stroke="#0F172A" stroke-opacity="0.18"/>
+    <circle cx="235" cy="270" r="9" stroke="#0F172A" stroke-opacity="0.18"/>
+  </g>
+
+  <!-- Shield mark (right side), minimal + modern -->
+  <g filter="url(#shadow)">
+    <path d="M860 300c0-18 15-33 33-33h74c18 0 33 15 33 33v46c0 53-41 102-100 118-59-16-100-65-100-118v-46Z" fill="url(#shield)"/>
+    <path d="M932 468c-66-18-112-74-112-132v-46c0-40 33-73 73-73h74c40 0 73 33 73 73v46c0 58-46 114-112 132h4Z" stroke="#0F172A" stroke-opacity="0.18" stroke-width="2"/>
+
+    <!-- check -->
+    <path d="M900 350l26 26 52-60" stroke="#0F172A" stroke-opacity="0.26" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Soft horizon city blocks (very subtle) -->
+  <g opacity="0.18">
+    <rect x="120" y="640" width="80" height="90" rx="10" fill="#0F172A"/>
+    <rect x="210" y="620" width="110" height="110" rx="12" fill="#0F172A"/>
+    <rect x="334" y="660" width="70" height="70" rx="10" fill="#0F172A"/>
+    <rect x="420" y="600" width="140" height="130" rx="14" fill="#0F172A"/>
+    <rect x="570" y="645" width="95" height="85" rx="12" fill="#0F172A"/>
+    <rect x="676" y="610" width="150" height="120" rx="16" fill="#0F172A"/>
+  </g>
+</svg>

@@ -1,0 +1,45 @@
+# ── Environment & Secrets ──
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# ── Logs ──
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ── Dependencies ──
+node_modules
+__pycache__
+*.pyc
+.venv
+venv
+
+# ── Build Output ──
+dist
+dist-ssr
+*.local
+
+# ── Editor & OS ──
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+Thumbs.db
+
+# ── Backend temp data ──
+backend/*.jsonl
+backend/data/
+backend/*.json
+!backend/requirements.txt

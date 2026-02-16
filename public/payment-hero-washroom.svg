@@ -1,0 +1,43 @@
+<svg width="1400" height="900" viewBox="0 0 1400 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1400" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E9FFF4"/>
+      <stop offset="0.55" stop-color="#F7FBFF"/>
+      <stop offset="1" stop-color="#EAF6FF"/>
+    </linearGradient>
+    <radialGradient id="g1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(340 220) rotate(35) scale(520 420)">
+      <stop stop-color="#34D399" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#34D399" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="g2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1080 220) rotate(25) scale(620 520)">
+      <stop stop-color="#38BDF8" stop-opacity="0.20"/>
+      <stop offset="1" stop-color="#38BDF8" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shadow" x="-50" y="-50" width="1600" height="1000" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#000" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <rect width="1400" height="900" fill="url(#bg)"/>
+  <circle cx="340" cy="220" r="340" fill="url(#g1)"/>
+  <circle cx="1080" cy="220" r="380" fill="url(#g2)"/>
+
+  <g opacity="0.22">
+    <path d="M120 640 C 320 520, 520 760, 720 640 S 1120 680, 1280 560" stroke="#10B981" stroke-width="6" stroke-linecap="round" stroke-dasharray="14 18"/>
+    <path d="M140 720 C 340 600, 560 840, 760 720 S 1180 760, 1260 660" stroke="#0EA5E9" stroke-width="6" stroke-linecap="round" stroke-dasharray="14 18"/>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="420" y="250" width="560" height="520" rx="60" fill="rgba(255,255,255,0.65)"/>
+    <rect x="470" y="300" width="460" height="420" rx="48" fill="rgba(255,255,255,0.65)" stroke="rgba(0,0,0,0.06)"/>
+
+    <!-- Simplified washroom icon illustration -->
+    <rect x="615" y="360" width="170" height="200" rx="46" fill="rgba(16,185,129,0.10)"/>
+    <path d="M650 470 C 660 420, 740 420, 750 470" stroke="rgba(0,0,0,0.25)" stroke-width="10" stroke-linecap="round"/>
+    <path d="M640 520 C 680 570, 720 585, 760 520" stroke="rgba(0,0,0,0.22)" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="715" cy="420" r="10" fill="rgba(14,165,233,0.55)"/>
+
+    <rect x="520" y="590" width="360" height="34" rx="17" fill="rgba(14,165,233,0.12)"/>
+    <rect x="560" y="650" width="280" height="18" rx="9" fill="rgba(0,0,0,0.08)"/>
+  </g>
+</svg>

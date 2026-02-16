@@ -1,0 +1,42 @@
+<svg width="1400" height="900" viewBox="0 0 1400 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1400" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E9FFF4"/>
+      <stop offset="0.55" stop-color="#F7FBFF"/>
+      <stop offset="1" stop-color="#EAF6FF"/>
+    </linearGradient>
+    <radialGradient id="g1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(340 220) rotate(35) scale(520 420)">
+      <stop stop-color="#34D399" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#34D399" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="g2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1080 220) rotate(25) scale(620 520)">
+      <stop stop-color="#38BDF8" stop-opacity="0.20"/>
+      <stop offset="1" stop-color="#38BDF8" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shadow" x="-50" y="-50" width="1600" height="1000" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#000" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <rect width="1400" height="900" fill="url(#bg)"/>
+  <circle cx="340" cy="220" r="340" fill="url(#g1)"/>
+  <circle cx="1080" cy="220" r="380" fill="url(#g2)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="330" y="250" width="740" height="520" rx="66" fill="rgba(255,255,255,0.65)"/>
+
+    <!-- Tissue pack -->
+    <rect x="420" y="520" width="340" height="200" rx="34" fill="rgba(14,165,233,0.12)" stroke="rgba(0,0,0,0.06)"/>
+    <rect x="458" y="565" width="260" height="18" rx="9" fill="rgba(255,255,255,0.55)"/>
+    <rect x="458" y="600" width="200" height="18" rx="9" fill="rgba(255,255,255,0.38)"/>
+
+    <!-- Sanitizer bottle -->
+    <rect x="810" y="440" width="200" height="280" rx="60" fill="rgba(16,185,129,0.12)" stroke="rgba(0,0,0,0.06)"/>
+    <rect x="860" y="390" width="100" height="70" rx="22" fill="rgba(16,185,129,0.16)"/>
+    <rect x="848" y="500" width="124" height="22" rx="11" fill="rgba(255,255,255,0.55)"/>
+
+    <!-- Droplets -->
+    <path d="M660 410 C 660 360, 720 360, 720 410 C 720 450, 690 475, 690 475 C 690 475, 660 450, 660 410 Z" fill="rgba(14,165,233,0.35)"/>
+    <path d="M610 450 C 610 412, 650 412, 650 450 C 650 480, 630 498, 630 498 C 630 498, 610 480, 610 450 Z" fill="rgba(16,185,129,0.28)"/>
+  </g>
+</svg>

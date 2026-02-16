@@ -1,0 +1,29 @@
+<svg width="360" height="220" viewBox="0 0 360 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="360" y2="220" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#10B981" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#0EA5E9" stop-opacity="0.10"/>
+    </linearGradient>
+    <linearGradient id="coin" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#34D399"/>
+      <stop offset="1" stop-color="#10B981"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="1" y="1" width="358" height="218" rx="26" fill="url(#bg)" stroke="rgba(0,0,0,0.06)"/>
+
+  <path d="M70 160 C 120 120, 160 180, 210 140 S 290 140, 300 110" stroke="rgba(16,185,129,0.35)" stroke-width="2" stroke-linecap="round" stroke-dasharray="7 10"/>
+
+  <g opacity="0.9">
+    <circle cx="120" cy="92" r="28" fill="url(#coin)"/>
+    <path d="M110 92 H130" stroke="white" stroke-width="3" stroke-linecap="round"/>
+    <path d="M120 82 V102" stroke="white" stroke-width="3" stroke-linecap="round"/>
+  </g>
+
+  <g opacity="0.85">
+    <rect x="178" y="78" width="118" height="86" rx="18" fill="rgba(255,255,255,0.55)" stroke="rgba(0,0,0,0.06)"/>
+    <rect x="196" y="98" width="68" height="10" rx="5" fill="rgba(16,185,129,0.30)"/>
+    <rect x="196" y="118" width="88" height="10" rx="5" fill="rgba(14,165,233,0.22)"/>
+    <rect x="196" y="138" width="56" height="10" rx="5" fill="rgba(0,0,0,0.08)"/>
+  </g>
+</svg>

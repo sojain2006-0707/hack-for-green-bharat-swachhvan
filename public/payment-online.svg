@@ -1,0 +1,29 @@
+<svg width="360" height="220" viewBox="0 0 360 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="360" y2="220" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0EA5E9" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#10B981" stop-opacity="0.10"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#38BDF8"/>
+      <stop offset="1" stop-color="#0EA5E9"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="1" y="1" width="358" height="218" rx="26" fill="url(#bg)" stroke="rgba(0,0,0,0.06)"/>
+
+  <path d="M60 150 C 120 100, 170 170, 230 120 S 305 120, 312 92" stroke="rgba(14,165,233,0.35)" stroke-width="2" stroke-linecap="round" stroke-dasharray="7 10"/>
+
+  <g opacity="0.9">
+    <rect x="84" y="72" width="140" height="92" rx="18" fill="url(#card)"/>
+    <rect x="98" y="92" width="70" height="10" rx="5" fill="rgba(255,255,255,0.50)"/>
+    <rect x="98" y="112" width="108" height="10" rx="5" fill="rgba(255,255,255,0.38)"/>
+    <rect x="98" y="132" width="46" height="10" rx="5" fill="rgba(255,255,255,0.55)"/>
+  </g>
+
+  <g opacity="0.88">
+    <circle cx="266" cy="96" r="26" fill="rgba(255,255,255,0.55)" stroke="rgba(0,0,0,0.06)"/>
+    <path d="M254 96 H278" stroke="rgba(14,165,233,0.70)" stroke-width="3" stroke-linecap="round"/>
+    <path d="M266 84 V108" stroke="rgba(16,185,129,0.55)" stroke-width="3" stroke-linecap="round"/>
+  </g>
+</svg>
