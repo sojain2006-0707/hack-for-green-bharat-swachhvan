@@ -14,8 +14,9 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?logo=typescript&logoColor=white)](https://typescriptlang.org)
 [![Vite](https://img.shields.io/badge/Vite-7.3-646CFF?logo=vite&logoColor=white)](https://vitejs.dev)
 [![Supabase](https://img.shields.io/badge/Supabase-Realtime-3FCF8E?logo=supabase&logoColor=white)](https://supabase.com)
-[![Pathway](https://img.shields.io/badge/Pathway-RAG_Pipeline-FF6B35)](https://pathway.com)
+[![Pathway](https://img.shields.io/badge/Pathway-Streaming_Pipeline-FF6B35)](https://pathway.com)
 [![Leaflet](https://img.shields.io/badge/Leaflet-Maps-199900?logo=leaflet&logoColor=white)](https://leafletjs.com)
+[![PWA](https://img.shields.io/badge/PWA-Installable-5A0FC8?logo=pwa&logoColor=white)](https://web.dev/progressive-web-apps/)
 
 ---
 
@@ -40,6 +41,7 @@
 - [Backend Setup](#-backend-setup)
 - [Project Structure](#-project-structure)
 - [Demo Credentials](#-demo-credentials)
+- [Progressive Web App (PWA)](#-progressive-web-app-pwa)
 - [Screenshots](#-screenshots)
 - [Team](#-team)
 
@@ -78,6 +80,8 @@ India faces a severe shortage of accessible, clean public washrooms — particul
 | 👤 **User Profiles** | Service history, saved locations, referral program |
 | 🎁 **Refer & Earn** | Incentive-based referral system for user growth |
 | 🌐 **Fallback Geocoding** | Offline fallback for 17+ Indian cities when backend is unreachable |
+| 📲 **Progressive Web App** | Installable on any device with offline caching & home screen prompt |
+| 🔄 **Pathway Streaming** | Real-time van telemetry processing with Pathway's streaming engine |
 
 ---
 
@@ -144,13 +148,12 @@ Delhi, Mumbai, Bangalore, Chennai, Kolkata, Hyderabad, Pune, Ahmedabad, Jaipur, 
 | **shadcn/ui** | Accessible, customizable UI components |
 | **Leaflet** | Interactive maps with OpenStreetMap (free, no API key) |
 | **React Query** | Server state management & caching |
-| **React Router v6** | Client-side routing with protected routes |
-
+| **React Router v6** | Client-side routing with protected routes || **vite-plugin-pwa** | Progressive Web App with Workbox service worker |
 ### Backend
 | Technology | Purpose |
 |-----------|---------|
 | **Supabase** | PostgreSQL database, real-time subscriptions, auth |
-| **Pathway** | Real-time RAG pipeline for AI chatbot |
+| **Pathway ≥0.15** | Real-time streaming pipeline — van telemetry, alerts & RAG |
 | **Python** | Van simulator & RAG server (HTTP, port 8091) |
 | **SerpAPI** | Google Maps geocoding for worldwide location search |
 
@@ -204,15 +207,15 @@ Delhi, Mumbai, Bangalore, Chennai, Kolkata, Hyderabad, Pune, Ahmedabad, Jaipur, 
 
 ### Prerequisites
 
-- **Node.js** ≥ 18.x & **npm** ≥ 9.x
+- **Node.js** ≥ 18.x & **pnpm** ≥ 9.x (recommended) or npm
 - **Python** ≥ 3.9 (for backend services)
 - **Git**
 
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/swachhvan.git
-cd swachhvan
+git clone https://github.com/tanmayai23/HACK-FOR-GREEN-BHARAT.git
+cd HACK-FOR-GREEN-BHARAT
 ```
 
 ### 2. Configure Environment
@@ -240,18 +243,20 @@ SERPAPI_KEY=your-serpapi-key
 ### 3. Install & Run Frontend
 
 ```bash
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 ```
 
-The app will be available at `http://localhost:5173`
+The app will be available at `http://localhost:8080`
 
 ### 4. Build for Production
 
 ```bash
-npm run build
-npm run preview
+pnpm run build
+pnpm run preview
 ```
+
+The production build generates a fully installable PWA with service worker (`sw.js`) and web manifest.
 
 ---
 
@@ -319,13 +324,16 @@ swachhvan/
 │   │   └── utils.ts          # Utility functions
 │   ├── pages/                # All app pages (20+ screens)
 │   ├── App.tsx               # Root component with routing
-│   └── main.tsx              # Entry point
+│   ├── main.tsx              # Entry point
+│   └── components/
+│       └── PwaInstallPrompt.tsx  # PWA install banner
 ├── backend/
 │   ├── rag_server.py         # RAG server (51 FAQs + geocode + nearby endpoints)
 │   ├── van_simulator.py      # Van GPS & sensor simulator (8 vans, Delhi NCR)
 │   ├── pathway_pipeline.py   # Pathway data processing pipeline
 │   └── requirements.txt      # Python dependencies
-├── .env                      # Single environment config
+├── .env                      # Environment config (git-ignored)
+├── .env.example              # Template with placeholder values
 ├── package.json
 ├── tailwind.config.ts
 ├── vite.config.ts
@@ -345,7 +353,30 @@ For testing without Supabase configuration:
 
 ---
 
-## 📸 Screenshots
+## � Progressive Web App (PWA)
+
+SwachhVan is a fully installable Progressive Web App:
+
+- **Install to Home Screen** — users see a native "Add to Home Screen" prompt on supported browsers
+- **Offline Caching** — Workbox service worker precaches all static assets for offline access
+- **Standalone Mode** — runs in full-screen without browser chrome
+- **Auto-Update** — service worker auto-updates when new versions are deployed
+- **Runtime Caching** — Supabase API responses cached with NetworkFirst strategy (5-min TTL)
+
+### PWA Configuration
+
+| Property | Value |
+|----------|-------|
+| Display | `standalone` |
+| Orientation | `portrait` |
+| Theme Color | `#16a34a` (green) |
+| Icons | 192×192 & 512×512 PNG |
+| Service Worker | Workbox `generateSW` |
+| Precached Assets | ~25 entries (~5 MB) |
+
+---
+
+## �📸 Screenshots
 
 <div align="center">
 
@@ -375,7 +406,23 @@ SwachhVan aligns with **UN Sustainable Development Goals**:
 
 ## � Changelog
 
-### Recent Updates
+### v2.0 — Production Release
+
+| Change | Details |
+|--------|--------|
+| **Progressive Web App** | Fully installable PWA with Workbox service worker, offline caching & home screen prompt |
+| **Pathway Streaming Engine** | Full Pathway integration — `pw.io.jsonlines.read(mode="streaming")`, `groupby().reduce()`, `filter()`, UDFs, `pw.run()` |
+| **Van Telemetry Pipeline** | Real-time fleet stats & low-resource alerts via Pathway streaming output |
+| **Price Update** | Washroom ₹10→₹20, Freshen Up ₹20→₹40 across all pages |
+| **Production Polish** | Removed all prototype/mock labels from 10+ pages |
+| **Settings Redesign** | Removed Dark mode & Low data mode, tightened layout to fit phone frame |
+| **Login Fix** | Fixed critical LoginPage crash from missing `isLoading` state |
+| **ChatBot Overflow Fix** | Fixed chat window content bleeding outside its container |
+| **OnlinePay Header** | Fixed header alignment and spacing on payment page |
+| **Package Manager** | Migrated from npm to pnpm for faster installs |
+| **SwachhVan Branding** | Custom favicon (ICO/SVG/PNG) replacing default branding |
+
+### v1.0 — Initial Release
 
 | Change | Details |
 |--------|---------|
