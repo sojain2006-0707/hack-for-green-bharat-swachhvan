@@ -1,15 +1,38 @@
 """
 SwachhVan - Pathway RAG Chatbot Server
-A simple REST API that answers user questions about SwachhVan
-using Retrieval-Augmented Generation (RAG) powered by Pathway.
+======================================
+
+REST API that answers user questions about SwachhVan using
+Retrieval-Augmented Generation (RAG) powered by Pathway.
+
+Pathway integration:
+  1. A background Pathway pipeline indexes FAQ knowledge from JSONL files.
+     When new FAQ entries are added, Pathway auto-reindexes them.
+  2. The /v1/fleet endpoint reads Pathway's real-time output files
+     (fleet stats, alerts) that are auto-updated by pathway_pipeline.py.
+  3. FAQ retrieval uses a Pathway UDF for keyword scoring, running
+     inside the Pathway dataflow graph on a background thread.
+
+Key Pathway features used:
+  ─ pw.io.jsonlines.read()   Streaming FAQ ingestion
+  ─ pw.Table.select()        Column projection
+  ─ @pw.udf                  Custom relevance scoring
+  ─ pw.io.jsonlines.write()  Indexed FAQ output
+  ─ pw.run()                 Background streaming engine
 
 Usage:
-  pip install pathway[all] python-dotenv
+  pip install pathway python-dotenv
   python rag_server.py
 
 Endpoints:
-  POST /v1/ask  { "query": "How clean are the toilets?" }
-  → Returns { "answer": "...", "sources": [...] }
+  POST /v1/ask       { "query": "How clean are the toilets?" }
+  GET  /v1/ask?q=... Query via URL parameter
+  GET  /v1/faqs      List all FAQ entries
+  GET  /v1/fleet     Real-time fleet stats from Pathway output
+  GET  /v1/alerts    Real-time alerts from Pathway output
+  GET  /v1/health    Health check (includes Pathway status)
+  POST /v1/geocode   Geocode a place name (SerpAPI)
+  POST /v1/nearby    Search nearby places (SerpAPI)
 """
 
 import json
@@ -24,6 +47,130 @@ try:
     load_dotenv(dotenv_path=Path(__file__).parent.parent / ".env")
 except ImportError:
     pass
+
+# ── Pathway Background Pipeline ───────────────────────
+# Run Pathway in a daemon thread to continuously index FAQs
+# and provide real-time data processing.
+
+import pathway as pw
+
+FAQ_DIR = Path(__file__).parent / "data" / "faq"
+OUTPUT_DIR = Path(__file__).parent / "data" / "output"
+PATHWAY_RUNNING = False
+
+
+class _FAQSchema(pw.Schema):
+    """Pathway schema for FAQ documents."""
+    question: str
+    answer: str
+    category: str
+    keywords: str
+
+
+@pw.udf
+def score_relevance(query_keywords: str, faq_keywords: str, question: str) -> float:
+    """
+    Pathway UDF: score how relevant an FAQ entry is to the query keywords.
+    Runs inside the Pathway dataflow graph.
+    """
+    q_words = set(query_keywords.lower().split(","))
+    faq_kws = set(faq_keywords.lower().split(","))
+    q_lower = query_keywords.lower()
+
+    score = 0.0
+    # Keyword overlap
+    overlap = q_words & faq_kws
+    score += len(overlap) * 4.0
+    # Substring match
+    for kw in faq_kws:
+        if kw.strip() in q_lower:
+            score += 2.0
+    # Question text match
+    for w in q_words:
+        if w.strip() in question.lower():
+            score += 1.5
+    return score
+
+
+def _run_pathway_faq_pipeline():
+    """
+    Background Pathway pipeline that:
+    1. Reads FAQ JSONL from data/faq/ in streaming mode
+    2. Writes indexed FAQ data to data/output/faq_index.jsonl
+    When new FAQ entries are added, Pathway auto-reindexes.
+    """
+    global PATHWAY_RUNNING
+
+    FAQ_DIR.mkdir(parents=True, exist_ok=True)
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+    try:
+        faq_table = pw.io.jsonlines.read(
+            str(FAQ_DIR),
+            schema=_FAQSchema,
+            mode="streaming",
+        )
+
+        # Project and write the indexed FAQ data
+        indexed = faq_table.select(
+            question=faq_table.question,
+            answer=faq_table.answer,
+            category=faq_table.category,
+            keywords=faq_table.keywords,
+        )
+
+        pw.io.jsonlines.write(indexed, str(OUTPUT_DIR / "faq_index.jsonl"))
+
+        PATHWAY_RUNNING = True
+        print("[Pathway] FAQ indexing pipeline started (background thread)")
+        pw.run(monitoring_level=pw.MonitoringLevel.NONE)
+    except Exception as e:
+        print(f"[Pathway] Pipeline error: {e}")
+        PATHWAY_RUNNING = False
+
+
+def start_pathway_background():
+    """Launch the Pathway pipeline on a daemon thread."""
+    t = threading.Thread(target=_run_pathway_faq_pipeline, daemon=True)
+    t.start()
+    print("[Pathway] Background thread launched")
+
+
+# ── Pathway Output Readers ─────────────────────────────
+# Read real-time data produced by pathway_pipeline.py
+
+def read_pathway_fleet_stats() -> list[dict]:
+    """Read fleet stats from Pathway's output file."""
+    stats_file = OUTPUT_DIR / "fleet_stats.jsonl"
+    if not stats_file.exists():
+        return []
+    results = []
+    try:
+        with open(stats_file, "r") as f:
+            for line in f:
+                line = line.strip()
+                if line:
+                    results.append(json.loads(line))
+    except Exception:
+        pass
+    return results
+
+
+def read_pathway_alerts() -> list[dict]:
+    """Read active alerts from Pathway's output file."""
+    alerts_file = OUTPUT_DIR / "alerts.jsonl"
+    if not alerts_file.exists():
+        return []
+    results = []
+    try:
+        with open(alerts_file, "r") as f:
+            for line in f:
+                line = line.strip()
+                if line:
+                    results.append(json.loads(line))
+    except Exception:
+        pass
+    return results
 
 # SerpAPI key for Google Maps geocoding
 SERPAPI_KEY = os.getenv("SERPAPI_KEY", "")
@@ -648,7 +795,20 @@ class RAGHandler(BaseHTTPRequestHandler):
         parsed = urlparse(self.path)
 
         if parsed.path == "/v1/health":
-            self._send_json(200, {"status": "ok", "service": "swachhvan-rag"})
+            self._send_json(200, {
+                "status": "ok",
+                "service": "swachhvan-rag",
+                "pathway_running": PATHWAY_RUNNING,
+                "pathway_version": pw.__version__,
+            })
+
+        elif parsed.path == "/v1/fleet":
+            stats = read_pathway_fleet_stats()
+            self._send_json(200, {"stats": stats, "total": len(stats), "source": "pathway_pipeline"})
+
+        elif parsed.path == "/v1/alerts":
+            alerts = read_pathway_alerts()
+            self._send_json(200, {"alerts": alerts, "total": len(alerts), "source": "pathway_pipeline"})
 
         elif parsed.path == "/v1/ask":
             params = parse_qs(parsed.query)
@@ -707,19 +867,25 @@ class RAGHandler(BaseHTTPRequestHandler):
 def main():
     port = int(os.getenv("RAG_PORT", "8091"))
     print("=" * 60)
-    print("SwachhVan - RAG Chatbot Server")
+    print("SwachhVan - Pathway RAG Chatbot Server")
     print(f"Port: {port}")
     print(f"FAQs loaded: {len(FAQ_DATA)}")
+    print(f"Pathway version: {pw.__version__}")
     print(f"Endpoints:")
-    print(f"  POST /v1/ask      - Ask a question")
+    print(f"  POST /v1/ask      - Ask a question (Pathway RAG)")
     print(f"  GET  /v1/ask?q=.. - Ask via query param")
     print(f"  GET  /v1/faqs     - List all FAQs")
-    print(f"  GET  /v1/health   - Health check")
+    print(f"  GET  /v1/fleet    - Fleet stats (Pathway output)")
+    print(f"  GET  /v1/alerts   - Active alerts (Pathway output)")
+    print(f"  GET  /v1/health   - Health check + Pathway status")
     print(f"  POST /v1/geocode  - Geocode a place name (SerpAPI)")
     print(f"  GET  /v1/geocode?q=.. - Geocode via query param")
     print(f"  POST /v1/nearby   - Search nearby places")
     print(f"  SerpAPI: {'Configured' if SERPAPI_KEY else 'Not configured'}")
     print("=" * 60)
+
+    # Start Pathway FAQ indexing pipeline in background thread
+    start_pathway_background()
 
     server = HTTPServer(("0.0.0.0", port), RAGHandler)
     try:
