@@ -15,7 +15,9 @@ export default function LoginPage() {
 	const nav = useNavigate();
 	const loc = useLocation() as any;
 
-	
+	const demoAuthEnabled = import.meta.env.VITE_DEMO_AUTH === "true";
+	const demoEmail = "demo@swachhvan.app";
+	const demoPassword = "demo123";
 
 	const [email, setEmail] = React.useState("");
 	const [password, setPassword] = React.useState("");
