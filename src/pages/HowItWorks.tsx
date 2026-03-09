@@ -66,14 +66,14 @@ export default function HowItWorks() {
                 <li>
                   <p className="text-2xl font-semibold tracking-tight text-foreground">2) Pick a service</p>
                   <p className="mt-2 text-lg leading-relaxed text-muted-foreground">
-                    Choose what you need — washroom use, freshen‑up, or hygiene essentials. Transparent prices like ₹10 / ₹20.
+                    Choose what you need — washroom use, freshen‑up, or hygiene essentials. Transparent prices like ₹20 / ₹40.
                   </p>
                 </li>
 
                 <li>
                   <p className="text-2xl font-semibold tracking-tight text-foreground">3) Book & pay</p>
                   <p className="mt-2 text-lg leading-relaxed text-muted-foreground">
-                    Confirm the booking in seconds. Payment supports cash or digital mode (demo flow).
+                    Confirm the booking in seconds. Payment supports cash or digital mode.
                   </p>
                 </li>
 
