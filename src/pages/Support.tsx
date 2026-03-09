@@ -44,7 +44,7 @@ const TOPICS: Topic[] = [
   {
     id: "payments",
     title: "Payments",
-    description: "COD, online payment (mock)",
+    description: "COD, online payment options",
     icon: CreditCard,
   },
   {
@@ -207,13 +207,13 @@ export default function Support() {
               <AccordionItem value="eta">
                 <AccordionTrigger className="text-sm">Why is the ETA changing?</AccordionTrigger>
                 <AccordionContent className="text-muted-foreground">
-                  ETA updates are based on availability and route changes. This is a frontend demo, so times are mocked.
+                  ETA updates are based on real-time van availability and traffic conditions. Times may vary depending on demand and route changes.
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="cod">
                 <AccordionTrigger className="text-sm">How does Cash on Delivery work?</AccordionTrigger>
                 <AccordionContent className="text-muted-foreground">
-                  Choose COD and pay when the van arrives. The booking confirmation here is UI-only.
+                  Choose COD at checkout and pay the operator directly when the van arrives. You'll receive a booking confirmation with details.
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="privacy">
@@ -237,7 +237,7 @@ export default function Support() {
                   <MessageCircle className="h-4 w-4" />
                 </div>
                 <div className="flex-1">
-                  <p className="text-sm font-semibold text-foreground">Chat (mock)</p>
+                  <p className="text-sm font-semibold text-foreground">Chat with us</p>
                   <p className="text-xs text-muted-foreground">Fastest way to get help</p>
                 </div>
                 <span className="rounded-full bg-emerald-600/10 px-3 py-1 text-[11px] font-semibold text-emerald-700 ring-1 ring-black/5">
@@ -254,7 +254,7 @@ export default function Support() {
                 </div>
                 <div className="flex-1">
                   <p className="text-sm font-semibold text-foreground">Call us</p>
-                  <p className="text-xs text-muted-foreground">9 AM – 9 PM (mock)</p>
+                  <p className="text-xs text-muted-foreground">9 AM – 9 PM, all days</p>
                 </div>
               </button>
 
@@ -267,7 +267,7 @@ export default function Support() {
                 </div>
                 <div className="flex-1">
                   <p className="text-sm font-semibold text-foreground">Email</p>
-                  <p className="text-xs text-muted-foreground">support@swachhvan (mock)</p>
+                  <p className="text-xs text-muted-foreground">support@swachhvan.app</p>
                 </div>
               </button>
             </div>
@@ -296,7 +296,7 @@ export default function Support() {
               <Button variant="brand" size="pill" className="w-full">
                 Send message
               </Button>
-              <p className="mt-3 text-center text-xs text-muted-foreground">(UI only — no backend yet)</p>
+              <p className="mt-3 text-center text-xs text-muted-foreground">We'll respond within 24 hours</p>
             </div>
           </Card>
         </section>
