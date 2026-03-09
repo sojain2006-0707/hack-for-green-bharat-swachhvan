@@ -94,7 +94,7 @@ export default function Service() {
               </div>
               <div>
                 <p className="text-sm font-semibold">Nearest van</p>
-                <p className="text-xs text-muted-foreground">ETA 6–15 min (mock)</p>
+                <p className="text-xs text-muted-foreground">ETA 6–15 min</p>
               </div>
             </div>
           </Card>
