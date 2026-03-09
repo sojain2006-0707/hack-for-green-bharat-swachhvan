@@ -169,7 +169,7 @@ export default function ReferEarn() {
                     <div className="text-sm font-semibold">Rewards</div>
                   </div>
                   <p className="mt-2 text-sm text-muted-foreground">
-                    Rewards are shown as credits and can be applied during checkout. (Prototype UI)
+                    Rewards are shown as credits and can be applied during checkout.
                   </p>
                 </div>
 
